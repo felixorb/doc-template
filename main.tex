@@ -1,0 +1,294 @@
+% 模板由网上模板修改得到
+% 使用 XeLaTex 引擎编译
+
+\documentclass[letterpaper,UTF-8,12pt]{ctexart}[leftmargin=*]
+
+\usepackage[empty]{fullpage}
+\usepackage{enumitem}
+\usepackage{ifxetex}
+\ifxetex
+  \usepackage{fontspec}
+  \usepackage[xetex]{hyperref}
+\else
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage[pdftex]{hyperref}
+\fi
+\usepackage{fontawesome}
+% 设置西文字体
+% \setmainfont{Times New Roman}
+% \setsansfont{DejaVu Sans}
+% \setmonofont{Latin Modern Mono}
+% 设置中文字体 fc-list -f "%{family}\n" :lang=zh >d:zhfont.txt
+% \setCJKmainfont[BoldFont={SimHei}, ItalicFont={KaiTi}]{SimSun}
+\usepackage{anyfontsize}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{tabularx}
+
+%-------------------------------------------------- SETTINGS HERE --------------------------------------------------
+% Header settings
+% 定义一些后面需要用到的常量
+\def \fullname {xxx}
+\def \subtitle {xxx}
+\def \gender {xxx}
+\def \birthdate {xxx}
+\def \avatar {xxx.png}
+
+\def \phoneicon {\faPhone}
+\def \phonetext {(+86)xxx-xxxx-xxxx}
+
+\def \emailicon {\faEnvelope}
+\def \emaillink {mailto:xxx@xxx.com}
+\def \emailtext {xxx@xxx.com}
+
+\def \githubicon {\faGithub}
+\def \githublink {https://github.com/xxx}
+\def \githubtext {github.com/xxx}
+
+\def \websiteicon {\faGlobe}
+\def \websitelink {http://xxx}
+\def \websitetext {xxx/\textasciitilde xxx}
+
+\def \linkedinicon {\faLinkedin}
+\def \linkedinlink {https://linkedin.com/in/xxx/}
+\def \linkedintext {/xxx}
+
+% 文档 Header 所用的样式，可选  \singlecol or \doublecol or \doublecolwithphoto
+\def \headertype {\doublecolwithphoto}
+
+% Misc settings
+\def \entryspacing {-0pt}
+
+\def \bulletstyle {\faAngleRight}
+
+% Define colours
+\definecolor{primary}{HTML}{000000}
+\definecolor{secondary}{HTML}{828282}% 0D47A1
+\definecolor{accent}{HTML}{263238}
+\definecolor{links}{HTML}{000000}%1565C0
+
+% Defines to make listing easier
+\def \phone {\phoneicon \hspace{3pt}{ \phonetext}}
+\def \email {\emailicon \hspace{3pt}\href{\emaillink}{\emailtext}}
+\def \github {\githubicon \hspace{3pt}\href{\githublink}{\githubtext}}
+\def \website {\websiteicon \hspace{3pt}\href{\websitelink}{\websitetext}}
+\def \linkedin {\linkedinicon \hspace{3pt}\href{\linkedinlink}{\linkedintext}}
+
+% Adjust margins
+\addtolength{\oddsidemargin}{-0.55in}
+\addtolength{\evensidemargin}{-0.55in}
+\addtolength{\textwidth}{1.1in}
+\addtolength{\topmargin}{-0.6in}
+\addtolength{\textheight}{1.1in}
+
+% Define the link colours
+\hypersetup{colorlinks=true, urlcolor=links}
+
+% Set the margin alignment 
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+%------------------------------------------------------------------------------------------------------------------- 
+% Custom commands 自定义一些命令，方便正文排版直接使用
+% （定义命令时，多余的回车可能会招来麻烦，末尾用 % 消除）
+
+% 文档整体布局分层：
+% 0. Header
+% 1. Section
+% 2. Entry
+% 3. Itemized list
+
+% section: normalsize
+% entry: default size
+% item: small size
+
+% (0) Header
+% Double column header - 双列 Header 样式：| 姓名 | 邮箱/主页/电话等（这里可以调整展示项的个数）|
+\newcommand{\doublecol}[4]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[c]{l}
+        % \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        % {\textit{\subtitle}} % You could add a subtitle here
+        \hspace{1em}%
+        \fontsize{25}{30}\selectfont{\color{primary}{{\textbf{\fullname}}}}
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l@{\hspace{1.5em}}l}
+        {\small#1} & {\small#2} \\
+        {\small#3} & {\small#4} \\
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+% Double column header with photo  - 双列 Header 样式：| 头像+姓名 | 邮箱/主页/电话等（这里可以调整展示项的个数）|
+\newcommand{\doublecolwithphoto}[4]{
+  \hspace{1em}%
+  \parbox{2cm}{
+    \includegraphics[width=2cm,height=2.8cm,clip]{\avatar}
+  }
+  \hspace{1em}%
+  \begin{tabularx}{0.8\textwidth}{Xr}
+    {
+      \begin{tabular}[c]{l}
+        % \hspace{1em}%
+        {\fontsize{20}{30}\selectfont{\color{primary}{{\textbf{\fullname}}}}} \\
+        {\textit{\gender}} \\% You could add a subtitle here
+        {\textit{\birthdate}} % You could add a subtitle here
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l@{\hspace{1.5em}}l}
+        {\small#1} & {\small#2} \\
+        {\small#3} & {\small#4} \\
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+% Single column header - 单列 Header 样式
+\newcommand{\singlecol}[4]{
+  \begin{tabularx}{\textwidth}{Xr}
+    {
+      \begin{tabular}[b]{l}
+        % \fontsize{35}{45}\selectfont{\color{primary}{{\textbf{\fullname}}}} \\
+        % {\textit{\subtitle}} % You could add a subtitle here
+        \fontsize{25}{30}\selectfont{\color{primary}{{\textbf{\fullname}}}}
+      \end{tabular}
+    } & {
+      \begin{tabular}[c]{l}
+        {\small#1} \\
+        {\small#2} \\
+        {\small#3} \\
+        {\small#4} \\
+      \end{tabular}
+    }
+  \end{tabularx}
+}
+
+% (1) Sections
+\renewcommand{\section}[2]{\vspace{5pt}%
+  \setlength{\fboxsep}{0pt}%
+  \colorbox{secondary}{%
+    \setlength{\fboxsep}{4pt}% 内边距
+    \setlength{\fboxrule}{0pt}% 边框
+    \framebox[\linewidth][l]{\color{white}\raggedbottom\normalsize{#1}\hspace{7pt}\textbf{#2}}}%
+}
+
+% (2) Entry start and end, for spacing
+\newcommand{\resumeEntryStart}{\begin{itemize}[leftmargin=2.5mm]}
+\newcommand{\resumeEntryEnd}{\end{itemize}\vspace{-10pt}}
+
+% Entry with title, subheading, date(s), and location
+\newcommand{\resumeEntryTSDL}[4]{%
+  \vspace{-10pt}\item[]%
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}%
+      \textbf{\color{primary}#1} & {\color{accent}\small#2} \\
+      \textit{\color{accent}\small#3} & \textit{\color{accent}\small#4} \\
+    \end{tabularx}\vspace{-10pt}
+}
+
+% Entry with title and date(s)
+\newcommand{\resumeEntryTD}[2]{%
+  \vspace{-10pt}\item[]%
+    \begin{tabularx}{0.97\textwidth}{X@{\hspace{60pt}}r}%
+      \textbf{\color{primary}#1} & {\color{accent}\small#2} \\
+    \end{tabularx}\vspace{-10pt}
+}
+
+% Entry for special (skills)
+\newcommand{\resumeEntryS}[2]{%
+  \item[]\small{%
+    \textbf{\color{primary}#1 }{#2 \vspace{-6pt}}%
+  }
+}
+
+% (3) Itemized list for the bullet points under an entry, if necessary
+\newcommand{\resumeItemListStart}{\begin{itemize}[leftmargin=4.5mm]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+% Resume item
+\renewcommand{\labelitemii}{\bulletstyle}
+\newcommand{\resumeItem}[1]{\item \small{{#1}}}
+
+% 用制表符对齐
+\newcommand{\tabItemListStart}[1]{\begin{tabbing} \hspace{#1} \= \kill}
+\newcommand{\tabItemListEnd}{\end{tabbing}} 
+\newcommand{\tabItem}[2]{\faAngleDoubleRight \, #1 \> #2}  
+\newcommand{\tabItemx}[2]{#1 \> #2}
+
+\begin{document}
+%-------------------------------------------------- BEGIN HERE --------------------------------------------------
+
+%---------------------------------------------------- HEADER ----------------------------------------------------
+
+% \headertype{\linkedin}{\github}{\website}{\phone}{\email}{} % Set the order of items here
+\headertype{\phone}{\email}{\github}{} % Set the order of items here
+\vspace{-0pt} % Set a negative value to push the body up, and the opposite
+
+%-------------------------------------------------- EDUCATION ---------------------------------------------------
+\section{\faGraduationCap}{教育经历}
+  \resumeEntryStart
+  \vspace{0.5em}%
+    \resumeEntryTSDL {xx大学}{2019 -- 2022}{计算机学院}{工学硕士}
+    \tabItemListStart{150pt}
+      \tabItem {绩点: }{核心专业课：}
+    \tabItemListEnd
+  \resumeEntryEnd
+
+  \resumeEntryStart
+    \resumeEntryTSDL {xx大学}{2015 -- 2019}{计算机学院}{工学学士}
+    \tabItemListStart{150pt}
+      \tabItem {绩点: }{核心专业课：}
+    \tabItemListEnd
+  \resumeEntryEnd
+
+%-------------------------------------------------- EXPERIENCE --------------------------------------------------
+\section{\faPieChart}{工作经历}
+  \resumeEntryStart
+  \vspace{0.5em}%
+    \resumeEntryTSDL{金拱门}{2022-07 -- 至今}{疯狂星期四活动策划}{北京}
+    \resumeItemListStart
+      \resumeItem {xxx}
+      \resumeItem {xxx}
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+
+%---------------------------------------------------  SKILLS ---------------------------------------------------
+\section{\faGears}{个人技能}
+  \resumeEntryStart
+    \resumeEntryTD {相关技术}{}
+    \resumeItemListStart
+      \resumeItem {xxx}
+      \resumeItem {xxx}
+    \resumeItemListEnd
+
+    \resumeEntryTD {其它}{}
+    \resumeItemListStart
+      \resumeItem {xxx}
+      \resumeItem {\LaTeX 的使用}
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+%-------------------------------------------------- PROJECTS --------------------------------------------------
+\section{\faFlask}{项目描述}
+  \resumeEntryStart
+    \resumeEntryTSDL {VMe50}{}{活动宣传}{项目地址：\href{https://github.com}{\normalfont github.com}}
+    \resumeItemListStart
+      \resumeItem {功能:}
+      \resumeItem {动机:}
+      \resumeItem {模型:}
+      \tabItemListStart{108pt}
+        \tabItem {xxx的实现: }{基于xxx}\\
+        \tabItem {xxx的实现方式: }{采用xxx}\\
+        \tabItemx {}{采用xxx}\\
+        \tabItem {xxx选型与实现: }{采用xxx}\\
+        \tabItemx {}{为xxx增添xxx}
+     \tabItemListEnd
+    \resumeItemListEnd
+  \resumeEntryEnd
+
+%-------------------------------------------------- END --------------------------------------------------
+\end{document}
