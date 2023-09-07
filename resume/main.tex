@@ -1,7 +1,7 @@
-% 模板由网上模板修改得到
-% 使用 XeLaTex 引擎编译
+% 由网上模板修改得到，使用 XeLaTex 引擎编译，默认UTF-8
+% \documentclass[letterpaper,UTF-8,12pt]{ctexart}[leftmargin=*]
 
-\documentclass[letterpaper,UTF-8,12pt]{ctexart}[leftmargin=*]
+\documentclass[letterpaper,12pt]{ctexart}[leftmargin=*]
 
 \usepackage[empty]{fullpage}
 \usepackage{enumitem}
@@ -14,7 +14,7 @@
   \usepackage[T1]{fontenc}
   \usepackage[pdftex]{hyperref}
 \fi
-\usepackage{fontawesome}
+\usepackage{fontawesome5}
 % 设置西文字体
 % \setmainfont{Times New Roman}
 % \setsansfont{DejaVu Sans}
@@ -53,6 +53,9 @@
 \def \linkedinicon {\faLinkedin}
 \def \linkedinlink {https://linkedin.com/in/xxx/}
 \def \linkedintext {/xxx}
+
+\def \wechaticon {\faWexin}
+\def \wechattext {xxxx}
 
 % 文档 Header 所用的样式，可选  \singlecol or \doublecol or \doublecolwithphoto
 \def \headertype {\doublecolwithphoto}
@@ -228,9 +231,9 @@
 \vspace{-0pt} % Set a negative value to push the body up, and the opposite
 
 %-------------------------------------------------- EDUCATION ---------------------------------------------------
-\section{\faGraduationCap}{教育经历}
-  \resumeEntryStart
+\section{\faGraduationCap}{教育经历}%
   \vspace{0.5em}%
+  \resumeEntryStart
     \resumeEntryTSDL {xx大学}{2019 -- 2022}{计算机学院}{工学硕士}
     \tabItemListStart{150pt}
       \tabItem {绩点: }{核心专业课：}
@@ -245,9 +248,9 @@
   \resumeEntryEnd
 
 %-------------------------------------------------- EXPERIENCE --------------------------------------------------
-\section{\faPieChart}{工作经历}
-  \resumeEntryStart
+\section{\faChartPie}{工作经历}%
   \vspace{0.5em}%
+  \resumeEntryStart
     \resumeEntryTSDL{金拱门}{2022-07 -- 至今}{疯狂星期四活动策划}{北京}
     \resumeItemListStart
       \resumeItem {xxx}
@@ -257,7 +260,8 @@
 
 
 %---------------------------------------------------  SKILLS ---------------------------------------------------
-\section{\faGears}{个人技能}
+\section{\faCogs}{个人技能}%
+  \vspace{0.5em}%
   \resumeEntryStart
     \resumeEntryTD {相关技术}{}
     \resumeItemListStart
@@ -273,7 +277,8 @@
   \resumeEntryEnd
 
 %-------------------------------------------------- PROJECTS --------------------------------------------------
-\section{\faFlask}{项目描述}
+\section{\faFlask}{项目描述}%
+  \vspace{0.5em}%
   \resumeEntryStart
     \resumeEntryTSDL {VMe50}{}{活动宣传}{项目地址：\href{https://github.com}{\normalfont github.com}}
     \resumeItemListStart
